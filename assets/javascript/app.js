@@ -10,13 +10,41 @@ $(document).ready(function () {
             "First Person Shooter (FPS)",
             "Role Playing Game (RPG)"]
     },
-    { question: "", correct: "", incorrect: ["", "", ""] },
-    { question: "", correct: "", incorrect: ["", "", ""] },
-    { question: "", correct: "", incorrect: ["", "", ""] },
-    { question: "", correct: "", incorrect: ["", "", ""] },
-    { question: "", correct: "", incorrect: ["", "", ""] },
-    { question: "", correct: "", incorrect: ["", "", ""] },
-    { question: "", correct: "", incorrect: ["", "", ""] },
+    {
+        question: "Which of these characters is the mascot of the video game company SEGA?", correct: "Sonic the Hedgehog", incorrect: ["Dynamite Headdy",
+            "Alex Kidd",
+            "Opa-Opa"]
+    },
+    {
+        question: "What is the default alias that Princess Garnet goes by in Final Fantasy IX?", correct: "Dagger", incorrect: ["Dirk",
+            "Garnet",
+            "Quina"]
+    },
+    {
+        question: "What is the name of the main healing item in Dark Souls?", correct: "Estus Flask", incorrect: ["Health Potion",
+            "Orange Juice",
+            "Ashen Flask"]
+    },
+    {
+        question: "In the video game Overwatch, which playable character is infamous for saying &quot;It&#039;s high noon.&quot;?", correct: "McCree", incorrect: ["Hanzo",
+            "Pharah",
+            "Soldier: 76"]
+    },
+    {
+        question: "In Portal 2, how did CEO of Aperture Science, Cave Johnson, presumably die?", correct: "Moon Rock Poisoning", incorrect: ["Accidentally sending a portal to the Moon",
+            "Slipped in the shower",
+            "Asbestos Poisoning"]
+    },
+    {
+        question: "What year was the game Dishonored released?", correct: "2012", incorrect: ["2011",
+            "2008",
+            "2013"]
+    },
+    {
+        question: "In the game &quot;Hearthstone&quot;, what is the best rank possible?", correct: "Rank 1 Legend", incorrect: ["Rank 1 Elite",
+            "Rank 1 Master",
+            "Rank 1 Supreme"]
+    },
     ];
     var $answerImage = $("img.answerImage");
     var userAnswer;
@@ -51,14 +79,14 @@ $(document).ready(function () {
     }
 
     function countdownTimer() {
-        $timerHolder.text(time);
+        $timerHolder.text("Time Remaining: " + time);
         clearInterval(timerInterval);
         timerInterval = setInterval(decrement, 1000);
     }
 
-    function decrement() { 
+    function decrement() {
         time--;
-        $timerHolder.text(time);
+        $timerHolder.text("Time Remaining: " + time);
         if (time === 0) {
             timesUp();
         }
