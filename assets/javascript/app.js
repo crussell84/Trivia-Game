@@ -119,7 +119,7 @@ $(document).ready(function () {
     function timesUp() {
         clearInterval(timerInterval);
         numIncorrect++;
-        userAnswer = false;
+        userAnswer = "timer";
         hideButtons();
         $timerHolder.text("Time's Up!");
         displayResult(userAnswer);
@@ -197,11 +197,14 @@ $(document).ready(function () {
     function displayResult(userAnswer) {
         hideButtons();
         $answerImage.addClass("mx-auto d-block").show();
-        if (userAnswer) {
-            $questionHolder.text("You're correct! " + correctAnswer + " is the right answer!")
+        if (userAnswer === true) {
+            $questionHolder.text("You're correct! " + correctAnswer + " is the right answer!");
+        }
+        else if (!userAnswer) {
+            $questionHolder.text("Not quite! " + correctAnswer + " is the right answer!");
         }
         else {
-            $questionHolder.text("Not quite! " + correctAnswer + " is the right answer!")
+            $questionHolder.text("Be faster! " + correctAnswer + " is the right answer!");
         }
         setTimeout(nextQuestion, 3000);
     }
@@ -229,5 +232,5 @@ $(document).ready(function () {
     $restart.on("click", newRound);
 
     newRound();
-    
+
 });
