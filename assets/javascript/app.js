@@ -61,10 +61,10 @@ $(document).ready(function () {
     var $thirdAnswer = $(".thirdAnswer");
     var $fourthAnswer = $(".fourthAnswer");
     var $scoreHolder = $(".score-holder");
-    var $restart = $("<button>").addClass("btn btn-outline-warning btn-lg btn-block").text("Start Again!");
+    var $restart = $("<button>").addClass("btn btn-outline-warning btn-block m-2").text("Start Again!");
     var questionTimer;
     var timerInterval;
-    var time = 8;
+    var time = 12;
 
     function shuffle(array) {
         var i = 0
@@ -120,7 +120,7 @@ $(document).ready(function () {
         hideButtons();
         $timerHolder.text("Time's Up!");
         displayResult(userAnswer);
-        time = 8;
+        time = 12;
     }
     function hideButtons() {
         $firstAnswer.hide();
@@ -157,7 +157,7 @@ $(document).ready(function () {
             case 6:
             case 5:
             case 4:
-                rank = "Intermediate!";
+                rank = "Veteran!";
                 break;
             case 3:
             case 2:
@@ -188,7 +188,6 @@ $(document).ready(function () {
         }
         else {
             endRound();
-            console.log("Got to endRound in nextQuestion!")
         }
     }
 
@@ -205,6 +204,8 @@ $(document).ready(function () {
     }
 
     function checkAnswer(numAnswer) {
+        clearInterval(timerInterval);
+        time = 12;
         if (answers[numAnswer] == correctAnswer) {
             numCorrect++;
             userAnswer = true;
@@ -214,7 +215,7 @@ $(document).ready(function () {
         }
         $timerHolder.empty();
         displayResult(userAnswer);
-        clearInterval(timerInterval);
+        
     }
 
     $(".firstAnswer").on("click", function () {

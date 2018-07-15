@@ -18,22 +18,23 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 class="text-center">Video Game Trivia!</h1>
+                <h1 class="text-center display-1 text-white-50 bg-dark d-none d-md-block">Video Game Trivia!</h1>
+                <h1 class="text-center display-3 text-white-50 bg-dark d-block d-sm-block d-md-none">Video Game Trivia!</h1>
             </div>
         </div>
-        <div class="container-fluid bg-light">
+        <div class="container-fluid bg-dark p-4">
             <div class="row">
                 <div class="col">
-                    <h2 class="timer-holder text-center"></h2>
-                    <h2 class="question-holder text-center"></h2>
-                    <button type="button" class="firstAnswer btn btn-outline-info btn-lg btn-block">First</button>
-                    <button type="button" class="secondAnswer btn btn-outline-info btn-lg btn-block">Second</button>
-                    <button type="button" class="thirdAnswer btn btn-outline-info btn-lg btn-block">Third</button>
-                    <button type="button" class="fourthAnswer btn btn-outline-info btn-lg btn-block">Fourth</button>
+                    <h3 class="timer-holder text-center text-white-50"></h3>
+                    <h3 class="question-holder text-center text-white"></h3>
+                    <button type="button" class="firstAnswer btn btn-outline-info btn-block">First</button>
+                    <button type="button" class="secondAnswer btn btn-outline-info btn-block">Second</button>
+                    <button type="button" class="thirdAnswer btn btn-outline-info btn-block">Third</button>
+                    <button type="button" class="fourthAnswer btn btn-outline-info btn-block">Fourth</button>
                     <div class="result-holder"></div>
-                    <img src="./assets/images/Citrine.png" class="answerImage" />
+                    <img src="./assets/images/Citrine.png" class="answerImage img-fluid" />
                     <div class="correct-answer-holder"></div>
-                    <div class="score-holder"></div>
+                    <div class="score-holder text-center text-white"></div>
                     <div class="restart-holder"></div>
                 </div>
             </div>
@@ -49,7 +50,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
-        <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
