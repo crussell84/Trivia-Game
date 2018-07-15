@@ -1,49 +1,50 @@
 $(document).ready(function () {
-    var questions = [{ question: "How many differently shaped Tetris pieces are there?", correct: "7", incorrect: ["5", "6", "8"] },
+    var questions = [{ question: "How many differently shaped Tetris pieces are there?", correct: "7", incorrect: ["5", "6", "8"], image: "./assets/images/tetris.jpg" },
     {
         question: "In Minecraft, which two items must be combined to craft a torch?", correct: "Stick and Coal", incorrect: ["Stick and Fire",
             "Wood and Coal",
-            "Wood and Fire"]
+            "Wood and Fire"],
+        image: "./assets/images/minecraft.gif"
     },
     {
         question: "League of Legends, DOTA 2, Smite and Heroes of the Storm are all part of which game genre?", correct: "Multiplayer Online Battle Arena (MOBA)", incorrect: ["Real Time Strategy (RTS)",
             "First Person Shooter (FPS)",
-            "Role Playing Game (RPG)"]
+            "Role Playing Game (RPG)"], image: "./assets/images/heroes.jpg"
     },
     {
         question: "Which of these characters is the mascot of the video game company SEGA?", correct: "Sonic the Hedgehog", incorrect: ["Dynamite Headdy",
             "Alex Kidd",
-            "Opa-Opa"]
+            "Opa-Opa"], image: "./assets/images/sonic.png"
     },
     {
         question: "What is the default alias that Princess Garnet goes by in Final Fantasy IX?", correct: "Dagger", incorrect: ["Dirk",
             "Garnet",
-            "Quina"]
+            "Quina"], image: "./assets/images/garnet.jpg"
     },
     {
         question: "What is the name of the main healing item in Dark Souls?", correct: "Estus Flask", incorrect: ["Health Potion",
             "Orange Juice",
-            "Ashen Flask"]
+            "Ashen Flask"], image: "./assets/images/estus-flask.png"
     },
     {
-        question: "In the video game Overwatch, which playable character is infamous for saying &quot;It&#039;s high noon.&quot;?", correct: "McCree", incorrect: ["Hanzo",
+        question: "In the video game Overwatch, which playable character is infamous for saying 'It's high noon.'?", correct: "McCree", incorrect: ["Hanzo",
             "Pharah",
-            "Soldier: 76"]
+            "Soldier: 76"], image: "./assets/images/mccree.png"
     },
     {
-        question: "In Portal 2, how did CEO of Aperture Science, Cave Johnson, presumably die?", correct: "Moon Rock Poisoning", incorrect: ["Accidentally sending a portal to the Moon",
-            "Slipped in the shower",
-            "Asbestos Poisoning"]
+        question: "The Khajiit are a race of cat-like creatures from which epic series of role-playing games, set across the land of Tamriel?", correct: "The Elder Scrolls", incorrect: ["Lord of the Rings",
+            "The Witcher",
+            "Neverwinter Nights"], image: "./assets/images/khajiit.jpg"
     },
     {
         question: "What year was the game Dishonored released?", correct: "2012", incorrect: ["2011",
             "2008",
-            "2013"]
+            "2013"], image: "./assets/images/dishonored.jpg"
     },
     {
-        question: "In the game &quot;Hearthstone&quot;, what is the best rank possible?", correct: "Rank 1 Legend", incorrect: ["Rank 1 Elite",
+        question: "In the game 'Hearthstone', what is the best rank possible?", correct: "Rank 1 Legend", incorrect: ["Rank 1 Elite",
             "Rank 1 Master",
-            "Rank 1 Supreme"]
+            "Rank 1 Supreme"], image: "./assets/images/legend.png"
     },
     ];
     var $answerImage = $("img.answerImage");
@@ -93,6 +94,8 @@ $(document).ready(function () {
     }
 
     function setupAnswers(index) {
+        $answerImage.attr("src", questions[index].image).removeClass("mx-auto d-block");
+        $answerImage.hide();
         correctAnswer = questions[index].correct;
         answers = [];
         answers.push(questions[index].correct)
@@ -127,7 +130,6 @@ $(document).ready(function () {
     }
 
     function newRound() {
-        $answerImage.hide();
         $restart.hide();
         $scoreHolder.empty().hide();
         $questionHolder.show();
@@ -167,8 +169,10 @@ $(document).ready(function () {
                 break;
         }
         $scoreHolder.show();
+        $timerHolder.empty();
         $restart.show();
         $questionHolder.hide();
+        $answerImage.removeClass("mx-auto d-block").hide();
         $scoreHolder.text("You got " + numCorrect + " correct and " + numIncorrect + " wrong! Your knowledege level is that of a " + rank);
         $scoreHolder.append($restart);
 
@@ -190,6 +194,7 @@ $(document).ready(function () {
 
     function displayResult(userAnswer) {
         hideButtons();
+        $answerImage.addClass("mx-auto d-block").show();
         if (userAnswer) {
             $questionHolder.text("You're correct! " + correctAnswer + " is the right answer!")
         }
@@ -207,6 +212,7 @@ $(document).ready(function () {
             numIncorrect++;
             userAnswer = false;
         }
+        $timerHolder.empty();
         displayResult(userAnswer);
         clearInterval(timerInterval);
     }
