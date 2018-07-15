@@ -54,6 +54,7 @@ $(document).ready(function () {
     var numCorrect = 0;
     var numIncorrect = 0;
     var answers = [];
+    var $answer = $(".answer");
     var $timerHolder = $(".timer-holder");
     var $questionHolder = $(".question-holder");
     var $firstAnswer = $(".firstAnswer");
@@ -103,10 +104,10 @@ $(document).ready(function () {
         answers.push(questions[index].incorrect[1]);
         answers.push(questions[index].incorrect[2]);
         shuffle(answers);
-        $firstAnswer.text(answers[0]).attr("data-answer", answers[0]).show();
-        $secondAnswer.text(answers[1]).attr("data-answer", answers[1]).show();
-        $thirdAnswer.text(answers[2]).attr("data-answer", answers[2]).show();
-        $fourthAnswer.text(answers[3]).attr("data-answer", answers[3]).show();
+        $firstAnswer.text(answers[0]).attr("data-answer", "0").show();
+        $secondAnswer.text(answers[1]).attr("data-answer","1").show();
+        $thirdAnswer.text(answers[2]).attr("data-answer", "2").show();
+        $fourthAnswer.text(answers[3]).attr("data-answer", "3").show();
     }
 
     function setupQuestion(index) {
@@ -218,20 +219,9 @@ $(document).ready(function () {
         
     }
 
-    $(".firstAnswer").on("click", function () {
-        checkAnswer(0);
-    });
-
-    $(".secondAnswer").on("click", function () {
-        checkAnswer(1);
-    });
-
-    $(".thirdAnswer").on("click", function () {
-        checkAnswer(2);
-    });
-
-    $(".fourthAnswer").on("click", function () {
-        checkAnswer(3);
+    $answer.on("click", function () {
+        var answer = $(this).attr("data-answer");
+        checkAnswer(answer);
     });
 
     $restart.on("click", newRound);
