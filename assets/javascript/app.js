@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).ready(function () {
     var questions = [{ question: "How many differently shaped Tetris pieces are there?", correct: "7", incorrect: ["5", "6", "8"] },
     {
         question: "In Minecraft, which two items must be combined to craft a torch?", correct: "Stick and Coal", incorrect: ["Stick and Fire",
@@ -34,6 +34,8 @@ $( document ).ready(function() {
     var $scoreHolder = $(".score-holder");
     var $restart = $("<button>").addClass("btn btn-outline-warning btn-lg btn-block").text("Start Again!");
     var questionTimer;
+    var timerInterval;
+    var time = 8;
 
     function shuffle(array) {
         var i = 0
@@ -45,6 +47,20 @@ $( document ).ready(function() {
             temp = array[i]
             array[i] = array[j]
             array[j] = temp
+        }
+    }
+
+    function countdownTimer() {
+        $timerHolder.text(time);
+        clearInterval(timerInterval);
+        timerInterval = setInterval(decrement, 1000);
+    }
+
+    function decrement() { 
+        time--;
+        $timerHolder.text(time);
+        if (time === 0) {
+            timesUp();
         }
     }
 
@@ -67,11 +83,13 @@ $( document ).ready(function() {
     }
 
     function timesUp() {
+        clearInterval(timerInterval);
         numIncorrect++;
         userAnswer = false;
         hideButtons();
         $timerHolder.text("Time's Up!");
         displayResult(userAnswer);
+        time = 8;
     }
     function hideButtons() {
         $firstAnswer.hide();
@@ -84,19 +102,20 @@ $( document ).ready(function() {
         $answerImage.hide();
         $restart.hide();
         $scoreHolder.empty().hide();
+        $questionHolder.show();
         numCorrect = 0;
         numIncorrect = 0;
         setupAnswers(0);
         setupQuestion(0);
-        questionTimer = setTimeout(timesUp, 5000);
+        countdownTimer();
         currentQuestion = 0;
     }
 
-    function endRound(){
+    function endRound() {
         clearTimeout(questionTimer);
         hideButtons();
         var rank = "";
-        switch(numCorrect) {
+        switch (numCorrect) {
             case 10:
                 rank = "Supreme Master!";
                 break;
@@ -119,39 +138,41 @@ $( document ).ready(function() {
                 rank = "...oh dear. Umm, maybe try a little harder?"
                 break;
         }
-        $scoreHolder.text("You got " + numCorrect + " correct and " + numIncorrect + " wrong! Your knowledege level is that of a " + rank).append($restart);
+        $scoreHolder.show();
+        $restart.show();
+        $questionHolder.hide();
+        $scoreHolder.text("You got " + numCorrect + " correct and " + numIncorrect + " wrong! Your knowledege level is that of a " + rank);
+        $scoreHolder.append($restart);
 
     }
 
-    function nextQuestion(){
-        
+    function nextQuestion() {
+
         currentQuestion++;
         if (questions[currentQuestion]) {
-        setupAnswers(currentQuestion);
-        setupQuestion(currentQuestion);
-        clearTimeout(questionTimer);
-        questionTimer = setTimeout(timesUp, 8000);
+            setupAnswers(currentQuestion);
+            setupQuestion(currentQuestion);
+            countdownTimer();
         }
-        else{
+        else {
             endRound();
+            console.log("Got to endRound in nextQuestion!")
         }
-
-        $timerHolder.empty();
     }
 
-    function displayResult(userAnswer){
+    function displayResult(userAnswer) {
         hideButtons();
-        if (userAnswer){
+        if (userAnswer) {
             $questionHolder.text("You're correct! " + correctAnswer + " is the right answer!")
         }
-        else { 
+        else {
             $questionHolder.text("Not quite! " + correctAnswer + " is the right answer!")
         }
         setTimeout(nextQuestion, 3000);
     }
 
     function checkAnswer(numAnswer) {
-        if ( answers[numAnswer] == correctAnswer){
+        if (answers[numAnswer] == correctAnswer) {
             numCorrect++;
             userAnswer = true;
         } else {
@@ -159,22 +180,22 @@ $( document ).ready(function() {
             userAnswer = false;
         }
         displayResult(userAnswer);
-        clearTimeout(questionTimer);
+        clearInterval(timerInterval);
     }
 
-    $(".firstAnswer").on("click", function(){
+    $(".firstAnswer").on("click", function () {
         checkAnswer(0);
     });
 
-    $(".secondAnswer").on("click", function(){
+    $(".secondAnswer").on("click", function () {
         checkAnswer(1);
     });
 
-    $(".thirdAnswer").on("click", function(){
+    $(".thirdAnswer").on("click", function () {
         checkAnswer(2);
     });
 
-    $(".fourthAnswer").on("click", function(){
+    $(".fourthAnswer").on("click", function () {
         checkAnswer(3);
     });
 
