@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // all of my global variables
     var questions = [{ question: "How many differently shaped Tetris pieces are there?", correct: "7", incorrect: ["5", "6", "8"], image: "./assets/images/tetris.jpg" },
     {
         question: "In Minecraft, which two items must be combined to craft a torch?", correct: "Stick and Coal", incorrect: ["Stick and Fire",
@@ -67,6 +68,7 @@ $(document).ready(function () {
     var timerInterval;
     var time = 12;
 
+    // start of function declarations
     function shuffle(array) {
         var i = 0
             , j = 0
@@ -83,10 +85,10 @@ $(document).ready(function () {
     function countdownTimer() {
         $timerHolder.text("Time Remaining: " + time);
         clearInterval(timerInterval);
-        timerInterval = setInterval(decrement, 1000);
+        timerInterval = setInterval(decrementTimer, 1000);
     }
 
-    function decrement() {
+    function decrementTimer() {
         time--;
         $timerHolder.text("Time Remaining: " + time);
         if (time === 0) {
@@ -123,6 +125,7 @@ $(document).ready(function () {
         displayResult(userAnswer);
         time = 12;
     }
+
     function hideButtons() {
         $firstAnswer.hide();
         $secondAnswer.hide();
@@ -169,6 +172,7 @@ $(document).ready(function () {
                 rank = "...oh dear. Umm, maybe try a little harder?"
                 break;
         }
+
         $scoreHolder.show();
         $timerHolder.empty();
         $restart.show();
@@ -176,11 +180,9 @@ $(document).ready(function () {
         $answerImage.removeClass("mx-auto d-block").hide();
         $scoreHolder.text("You got " + numCorrect + " correct and " + numIncorrect + " wrong! Your knowledege level is that of a " + rank);
         $scoreHolder.append($restart);
-
     }
 
     function nextQuestion() {
-
         currentQuestion++;
         if (questions[currentQuestion]) {
             setupAnswers(currentQuestion);
@@ -216,9 +218,9 @@ $(document).ready(function () {
         }
         $timerHolder.empty();
         displayResult(userAnswer);
-        
     }
 
+    // now stuff actually happens
     $answer.on("click", function () {
         var answer = $(this).attr("data-answer");
         checkAnswer(answer);
@@ -227,5 +229,5 @@ $(document).ready(function () {
     $restart.on("click", newRound);
 
     newRound();
-    //DO NOT CODE BENEATH THIS LINE
+    
 });
