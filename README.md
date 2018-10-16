@@ -7,7 +7,7 @@
 - You can restart the quiz by clicking on the button on the results page.
 
 ## To view live
-Go to: https://crussell84.github.io/Trivia-Game/
+Go to: https://www.startwithaskateboard.com/Trivia-Game/
 
 
 ## To Install Locally
